@@ -25,6 +25,7 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Try to install emacs
       run: |
+        brew tap d12frosted/emacs-plus
         brew install emacs-plus --HEAD --with-emacs-27-branch --with-jansson
         echo "Done!"
     timeout-minutes: 10
