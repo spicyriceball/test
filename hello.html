@@ -20,7 +20,7 @@
 
 <script>
  const getData = (url) => {
-   return fetch("https://cors-anywhere.herokuapp.com/" + url)
+   return fetch(url)
      .then (res => res.json())
      .then(data => data)
      .catch(error => error => ({ error }))
