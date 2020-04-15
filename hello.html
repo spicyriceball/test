@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>This is a test</h1>
+
+<h6 id="thonk">
+  Bypassing CORS and gaining XKCD access...
+</h6>
+
+<br>
+
+<figure class="figure  figure--center">
+  <img class="image" id="404img" src="" alt="">
+</figure>
+
+<br>
+
+[Click Here to Return to Safety]({{ site.url | append: site.baseurl }} "Home")
+
+<script>
+ const getData = (url) => {
+   return fetch("https://cors-anywhere.herokuapp.com/" + url)
+     .then (res => res.json())
+     .then(data => data)
+     .catch(error => error => ({ error }))
+ }
+
+ const getComic = (num) => {
+   getData("https://xkcd.com/" + num + "/info.0.json")
+     .then(res => {
+       document.getElementById("404img").src=res.img;
+       document.getElementById("404img").alt=num;
+       document.getElementById("thonk").innerHTML="Enjoy this lovely XKCD comic as you wait.";
+     })
+     .catch(error => error => ({ error }));
+ }
+
+ const getRandomComic = () => {
+   return getData('https://xkcd.com/info.0.json')
+     .then(response => {
+       let num = Math.floor(Math.random() * response.num);
+       getComic(num);
+     })
+     .catch(error => error => ({ error }))
+ }
+
+ getRandomComic();
+</script>
+
+<noscript>Sorry, but to view the XKCD comic, you need javascript enabled.</noscript>
+
+</body>
+</html>
